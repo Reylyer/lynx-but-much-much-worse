@@ -7,4 +7,4 @@ typedef struct tab {
     struct tab* prev;
 } tab_t;
 
-tab_t create_tab();
+tab_t* create_tab();

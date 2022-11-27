@@ -61,3 +61,18 @@ void insert_last_tab(browser_t* browser, tab_t* tab) {
         insert_first_tab(browser, tab);
     }
 }
+
+void to_previous_tab(browser_t* browser){
+    if (browser->active_tab) {
+        if (browser->active_tab->prev) {
+            browser->active_tab = browser->active_tab->prev;
+        }
+    }
+}
+void to_next_tab(browser_t* browser){
+    if (browser->active_tab) {
+        if (browser->active_tab->next) {
+            browser->active_tab = browser->active_tab->next;
+        }
+    }
+}
