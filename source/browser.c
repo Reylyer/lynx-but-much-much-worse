@@ -17,7 +17,7 @@ void print_tab_name(tab_t tab) {
 void insert_tab(browser_t* browser, tab_t* tab) {
     if (browser->active_tab) {
         if (browser->active_tab->next) {
-            tab->next = browser->active_tab->next->next;
+            tab->next = browser->active_tab->next;
             browser->active_tab->next = tab;
             tab->prev = browser->active_tab;
             tab->next->prev = tab;

@@ -50,9 +50,9 @@ void show_tabs(browser_t browser) {
     printf("   ");
     while(tab) {
         if(tab == browser.active_tab) {
-            set_color(2, FYELLOW, BGREEN);
+            set_color(1, BGREEN);
             print_tab_name(*tab);
-            set_color(2, FBLACK, BCYAN);
+            set_color(1, BCYAN);
         } else {
             print_tab_name(*tab);
         }
@@ -68,7 +68,7 @@ void show_header() {
 }
 
 void print_help_key(char* key, char* desc) { 
-    set_color(2, BCYAN, FYELLOW);
+    set_color(1, BCYAN);
     printf("%2s", key);
     reset_color();
     printf(" %s", desc);
@@ -88,7 +88,7 @@ void show_menu() {
 
 void show_prompt(char* prompt) {
     printf("\n");
-    set_color(2, BCYAN, FYELLOW);
+    set_color(1, BCYAN);
     printf("%s", prompt);
 }
 
