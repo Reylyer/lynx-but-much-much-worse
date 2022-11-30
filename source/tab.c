@@ -3,15 +3,16 @@
 #include <stdio.h>
 
 tab_t* create_tab(char* name){
+
     tab_t* tab = (tab_t*) malloc(sizeof(tab_t));
+    tab->next = NULL;
+    tab->prev = NULL;
+    tab->active_page = NULL;
+    tab->f_page = NULL;
+
     page_t* page = create_page(name);
     insert_page(tab, page);
 
-    // tab->link = NULL;
-    // tab->name = NULL;
-    
-    tab->next = NULL;
-    tab->prev = NULL;
     return tab;
 }
 
@@ -20,6 +21,7 @@ void print_page_name(page_t page){
 }
 
 void insert_page(tab_t* tab, page_t* page){
+
     if (tab->active_page) {
         if (tab->active_page->next) {
             insert_after_page(tab, page, tab->active_page);

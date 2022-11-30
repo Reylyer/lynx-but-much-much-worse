@@ -1,4 +1,5 @@
-typedef struct page{
+
+typedef struct page {
     char* name;
     struct page* next;
     struct page* prev;

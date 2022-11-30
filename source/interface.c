@@ -33,17 +33,17 @@ void interface_loop(browser_t* browser) {
             case 'm': 
             case 'M': 
                 show_prompt("Nama page: ");
-                page_name = malloc(100);
-                scanf("%[^\n]s", page_name); getchar();
+                page_name = (char*)malloc(100);
+                scanf("%[^\n]s\n", page_name); getchar();
                 reset_color();
                 page = create_page(page_name);
-                insert_page(tab, page);
+                insert_page(browser->active_tab, page);
                 break;
             case 'n':
             case 'N':
                 show_prompt("Spawn tab dengan page: ");
-                page_name = malloc(100);
-                scanf("%[^\n]s", page_name); getchar();
+                page_name = (char*)malloc(100);
+                scanf("%[^\n]s\n", page_name); getchar();
                 reset_color();
                 tab = create_tab(page_name);
                 insert_tab(browser, tab);
@@ -78,9 +78,11 @@ void show_tabs(browser_t browser) {
 void show_pages(browser_t browser) {
     printf("\nHistory:\n\n");
     page_t* page = browser.active_tab->f_page;
+    // printf("%x %x %x\n", page, page->next, page->prev);
     reset_color();
     
-    while(page) {
+    int i = 5;
+    while(page && i--) {
         if(page == browser.active_tab->active_page) {
             set_color(1, BCYAN);
             print_page_name(*page);
@@ -117,21 +119,22 @@ void show_menu() {
     printf("\n");
 }
 
-void show_prompt(char* prompt) {
+void show_prompt(const char* prompt) {
     printf("\n");
     set_color(1, BCYAN);
     printf("%s", prompt);
+
 }
 
 
 
 
 void refresh_view(browser_t* browser) {
-    system("cls");
+    // system("cls");
     show_header();
     show_tabs(*browser);
     show_pages(*browser);
-    printf("\n\n\n\n\n");
+    printf("\n\n\n\n");
     show_menu();
 }
 
