@@ -109,13 +109,14 @@ void print_help_key(char* key, char* desc) {
 }
 void show_menu() {
     print_help_key("N", "new tab");
-    print_help_key("Q", "quit");
+    print_help_key("Q", "quit\t");
     print_help_key("W",  "prev page");
     print_help_key("M",  "new page");
     printf("\n");
     print_help_key("A", "prev tab");
     print_help_key("S",  "next page");
     print_help_key("D",  "next tab");
+    // print_help_key("C",  "close tab");
     printf("\n");
 }
 
@@ -130,7 +131,7 @@ void show_prompt(const char* prompt) {
 
 
 void refresh_view(browser_t* browser) {
-    // system("cls");
+    system("cls");
     show_header();
     show_tabs(*browser);
     show_pages(*browser);

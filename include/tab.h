@@ -19,3 +19,4 @@ void insert_last_page(tab_t* tab, page_t* page);
 page_t* last_page(tab_t tab);
 
 void print_page_name(page_t page);
+void delete_all_after_page(page_t* page);

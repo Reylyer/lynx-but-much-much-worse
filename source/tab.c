@@ -24,10 +24,10 @@ void insert_page(tab_t* tab, page_t* page){
 
     if (tab->active_page) {
         if (tab->active_page->next) {
-            insert_after_page(tab, page, tab->active_page);
-        } else {
-            insert_last_page(tab, page);
-        }
+            delete_all_after_page(tab->active_page);
+        } 
+        insert_last_page(tab, page);
+
         tab->active_page = tab->active_page->next;
     } else {
         insert_first_page(tab, page);
@@ -71,6 +71,17 @@ page_t* last_page(tab_t tab) {
         return last;
     }
     return NULL;
+}
+
+void delete_all_after_page(page_t* page){
+    page_t* curr = page->next;
+    page_t* next;
+    while (curr) {
+        next = curr->next;
+        free(curr);
+        curr = next;
+    }
+    page->next = NULL;
 }
 
 // tab1      ->   tab2 
