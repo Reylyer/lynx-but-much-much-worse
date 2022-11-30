@@ -6,21 +6,18 @@ browser_t create_browser() {
     browser_t* browser = (browser_t*) malloc(sizeof(browser_t));
     browser->active_tab = NULL;
     browser->f_tab = NULL;
-    browser->f_history = NULL;
+    // browser->f_history = NULL;
     return *browser;
 }
 
 void print_tab_name(tab_t tab) {
-    printf(" %s ", tab.name);
+    printf(" %s ", tab.active_page->name);
 }
 
 void insert_tab(browser_t* browser, tab_t* tab) {
     if (browser->active_tab) {
         if (browser->active_tab->next) {
-            tab->next = browser->active_tab->next;
-            browser->active_tab->next = tab;
-            tab->prev = browser->active_tab;
-            tab->next->prev = tab;
+            insert_after_tab(browser, tab, browser->active_tab);
         } else {
             insert_last_tab(browser, tab);
         }
@@ -29,6 +26,13 @@ void insert_tab(browser_t* browser, tab_t* tab) {
         insert_first_tab(browser, tab);
         browser->active_tab = browser->f_tab;
     }
+}
+
+void insert_after_tab(browser_t* browser, tab_t* tab, tab_t* prec){
+    tab->next = prec->next;
+    prec->next = tab;
+    tab->prev = prec;
+    tab->next->prev = tab;
 }
 
 void insert_first_tab(browser_t* browser, tab_t* tab) {
@@ -73,6 +77,26 @@ void to_next_tab(browser_t* browser){
     if (browser->active_tab) {
         if (browser->active_tab->next) {
             browser->active_tab = browser->active_tab->next;
+        }
+    }
+}
+
+void to_previous_page(browser_t* browser){
+    if (browser->active_tab) {
+        if (browser->active_tab->active_page) {
+            if(browser->active_tab->active_page->prev){
+                browser->active_tab->active_page = browser->active_tab->active_page->prev;
+            }
+        }
+    }
+}
+
+void to_next_page(browser_t* browser){
+    if (browser->active_tab) {
+        if (browser->active_tab->active_page) {
+            if(browser->active_tab->active_page->next){
+                browser->active_tab->active_page = browser->active_tab->active_page->next;
+            }
         }
     }
 }

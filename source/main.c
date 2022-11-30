@@ -20,8 +20,8 @@ int main() {
     #endif
 
     browser_t browser = create_browser();
-    tab_t* tab1 = create_tab();
-    tab1->name = "New tab";
+    // tab1->name = "New tab";
+    tab_t* tab1 = create_tab("New tab");
     insert_tab(&browser, tab1);
     interface_loop(&browser);
 }

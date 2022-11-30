@@ -8,13 +8,16 @@
 void interface_loop(browser_t* browser) {
     char ch;
     char* tab_name; 
+    char* page_name; 
     tab_t* tab;
+    page_t* page;
     refresh_view(browser);
     do {
         ch = getch();
         switch (ch) {
             case 'w':
             case 'W': 
+                // to_previous_page(browser);
                 break;
             case 'a':
             case 'A':
@@ -22,18 +25,28 @@ void interface_loop(browser_t* browser) {
                 break;
             case 's':
             case 'S': 
+                // to_next_page(browser);
                 break;
             case 'd':
             case 'D': 
                 to_next_tab(browser); 
                 break;
+            case 'M': 
+                show_prompt("Nama page: ");
+                page_name = malloc(100);
+                scanf("%[^\n]s\n", page_name); getchar();
+                reset_color();
+                // page->name = page_name;
+                page = create_page(page_name);
+                insert_page(tab, page);
+                break;
             case 'n':
                 show_prompt("Nama tab: ");
-                tab = create_tab();
-                tab_name = malloc(20);
+                tab_name = malloc(100);
                 scanf("%[^\n]s\n", tab_name); getchar();
                 reset_color();
-                tab->name = tab_name;
+                // tab->name = tab_name;
+                tab = create_tab(tab_name);
                 insert_tab(browser, tab);
                 break;
             case 'q':
@@ -77,12 +90,13 @@ void print_help_key(char* key, char* desc) {
 void show_menu() {
     print_help_key("N", "new tab");
     print_help_key("Q", "quit");
-    print_help_key("W",  "not bind");
+    print_help_key("W",  "prev page");
+    print_help_key("M",  "new page");
     printf("\n");
     print_help_key("H", "history");
-    print_help_key("A", "prev");
-    print_help_key("S",  "not bind");
-    print_help_key("D",  "next");
+    print_help_key("A", "prev tab");
+    print_help_key("S",  "next page");
+    print_help_key("D",  "next tab");
     printf("\n");
 }
 
