@@ -1,5 +1,6 @@
 #include <tab.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 tab_t* create_tab(char* name){
     tab_t* tab = (tab_t*) malloc(sizeof(tab_t));
@@ -12,6 +13,10 @@ tab_t* create_tab(char* name){
     tab->next = NULL;
     tab->prev = NULL;
     return tab;
+}
+
+void print_page_name(page_t page){
+    printf(" %s ", page.name);
 }
 
 void insert_page(tab_t* tab, page_t* page){

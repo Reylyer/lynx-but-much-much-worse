@@ -5,7 +5,7 @@ typedef struct {
     tab_t* active_tab;
 } browser_t;
 
-browser_t create_browser();
+browser_t* create_browser();
 void print_tab_name(tab_t tab);
 
 void insert_tab(browser_t* browser, tab_t* tab);
@@ -15,3 +15,6 @@ void insert_last_tab(browser_t* browser, tab_t* tab);
 
 void to_previous_tab(browser_t* browser);
 void to_next_tab(browser_t* browser);
+
+void to_previous_page(browser_t* browser);
+void to_next_page(browser_t* browser);

@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-browser_t create_browser() {
+browser_t* create_browser() {
     browser_t* browser = (browser_t*) malloc(sizeof(browser_t));
     browser->active_tab = NULL;
     browser->f_tab = NULL;
     // browser->f_history = NULL;
-    return *browser;
+    return browser;
 }
 
 void print_tab_name(tab_t tab) {

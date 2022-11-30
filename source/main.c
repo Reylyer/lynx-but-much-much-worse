@@ -19,9 +19,9 @@ int main() {
         activateVirtualTerminal();
     #endif
 
-    browser_t browser = create_browser();
+    browser_t* browser = create_browser();
     // tab1->name = "New tab";
-    tab_t* tab1 = create_tab("New tab");
-    insert_tab(&browser, tab1);
-    interface_loop(&browser);
+    tab_t* tab = create_tab("New tab");
+    insert_tab(browser, tab);
+    interface_loop(browser);
 }

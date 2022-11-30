@@ -1,5 +1,6 @@
 #include <browser.h>
 
+
 void interface_loop(browser_t* browser);
 void show_tabs(browser_t browser);
 void main_view(browser_t browser);

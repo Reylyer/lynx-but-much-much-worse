@@ -7,7 +7,6 @@
 
 void interface_loop(browser_t* browser) {
     char ch;
-    char* tab_name; 
     char* page_name; 
     tab_t* tab;
     page_t* page;
@@ -17,7 +16,7 @@ void interface_loop(browser_t* browser) {
         switch (ch) {
             case 'w':
             case 'W': 
-                // to_previous_page(browser);
+                to_previous_page(browser);
                 break;
             case 'a':
             case 'A':
@@ -25,28 +24,28 @@ void interface_loop(browser_t* browser) {
                 break;
             case 's':
             case 'S': 
-                // to_next_page(browser);
+                to_next_page(browser);
                 break;
             case 'd':
             case 'D': 
                 to_next_tab(browser); 
                 break;
+            case 'm': 
             case 'M': 
                 show_prompt("Nama page: ");
                 page_name = malloc(100);
-                scanf("%[^\n]s\n", page_name); getchar();
+                scanf("%[^\n]s", page_name); getchar();
                 reset_color();
-                // page->name = page_name;
                 page = create_page(page_name);
                 insert_page(tab, page);
                 break;
             case 'n':
-                show_prompt("Nama tab: ");
-                tab_name = malloc(100);
-                scanf("%[^\n]s\n", tab_name); getchar();
+            case 'N':
+                show_prompt("Spawn tab dengan page: ");
+                page_name = malloc(100);
+                scanf("%[^\n]s", page_name); getchar();
                 reset_color();
-                // tab->name = tab_name;
-                tab = create_tab(tab_name);
+                tab = create_tab(page_name);
                 insert_tab(browser, tab);
                 break;
             case 'q':
@@ -76,6 +75,25 @@ void show_tabs(browser_t browser) {
     printf("\n\n");
 }
 
+void show_pages(browser_t browser) {
+    printf("\nHistory:\n\n");
+    page_t* page = browser.active_tab->f_page;
+    reset_color();
+    
+    while(page) {
+        if(page == browser.active_tab->active_page) {
+            set_color(1, BCYAN);
+            print_page_name(*page);
+            reset_color();
+        } else {
+            print_page_name(*page);
+        }
+        printf("\n");
+        page = page->next;
+    }
+    printf("\n\n");
+}
+
 void show_header() {
 
 }
@@ -93,7 +111,6 @@ void show_menu() {
     print_help_key("W",  "prev page");
     print_help_key("M",  "new page");
     printf("\n");
-    print_help_key("H", "history");
     print_help_key("A", "prev tab");
     print_help_key("S",  "next page");
     print_help_key("D",  "next tab");
@@ -106,19 +123,15 @@ void show_prompt(char* prompt) {
     printf("%s", prompt);
 }
 
+
+
+
 void refresh_view(browser_t* browser) {
     system("cls");
     show_header();
     show_tabs(*browser);
+    show_pages(*browser);
     printf("\n\n\n\n\n");
     show_menu();
 }
 
-void main_view(browser_t browser) {
-
-}
-
-
-void history_view(browser_t browser) {
-
-}
